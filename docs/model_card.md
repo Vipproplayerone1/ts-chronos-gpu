@@ -140,8 +140,8 @@ If using this model in research, please cite:
 ## Contact
 
 For issues or questions:
-- GitHub: [Repository URL]
-- Email: [Your contact]
+- GitHub: [(https://github.com/Vipproplayerone1/ts-chronos-gpu.git)]
+- Email: [nhan.bui210409@vnuk.edu.vn]
 
 ## Version History
 
