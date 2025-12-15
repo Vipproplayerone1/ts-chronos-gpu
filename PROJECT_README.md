@@ -2,6 +2,28 @@
 
 A comprehensive, reproducible time series forecasting project using the Chronos-2 foundation model with proper baseline comparisons, rolling-origin backtesting, and statistical significance testing.
 
+---
+
+## 🚀 **QUICK START** (3 Commands)
+
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Test setup
+python test_setup.py
+
+# 3. Run pipeline (Windows)
+run_end_to_end.bat
+
+# OR (Linux/Mac)
+bash run_end_to_end.sh
+```
+
+**Expected Runtime**: 30-60 minutes | **GPU Recommended** | **Results**: `artifacts/`
+
+---
+
 ## 📋 Project Overview
 
 - **Foundation Model**: Chronos-2 (zero-shot probabilistic forecasting)
@@ -65,59 +87,69 @@ A comprehensive, reproducible time series forecasting project using the Chronos-
     └── model_card.md          # Model card (1 page)
 ```
 
-## 🚀 Quick Start
+## 📦 Installation & Setup
 
-### 1. Environment Setup
+### **Step 1: Install Dependencies**
 
-**Option A: Using Conda (Recommended)**
-
+**Windows**:
 ```bash
-# Create environment
-conda env create -f environment.yml
-
-# Activate environment
-conda activate ts-chronos-gpu
-
-# Verify installation
-python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
-```
-
-**Option B: Using pip**
-
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Run the Pipeline
+**Linux/Mac (with Conda)**:
+```bash
+conda env create -f environment.yml
+conda activate ts-chronos-gpu
+```
 
-**Single Command (Recommended)**
+### **Step 2: Verify Setup**
+```bash
+python test_setup.py
+```
 
+✅ You should see: `[SUCCESS] ALL TESTS PASSED - Ready to run pipeline!`
+
+### **Step 3: Run the Pipeline**
+
+**Windows**:
+```bash
+# Double-click or run:
+run_end_to_end.bat
+```
+
+**Linux/Mac**:
 ```bash
 bash run_end_to_end.sh
 ```
 
-**Or run Python script directly**
-
+**Or directly**:
 ```bash
-python run_pipeline.py --config configs/default.yaml
+python run_pipeline.py
 ```
 
-### 3. View Results
+### **Step 4: View Results**
 
+**Summary**:
 ```bash
-# Check summary
+# Windows
+type artifacts\results_summary.yaml
+
+# Linux/Mac
 cat artifacts/results_summary.yaml
+```
 
-# View plots
+**Plots**:
+```bash
+# Windows
+explorer artifacts\figures
+
+# Linux/Mac
 ls artifacts/figures/
+```
 
-# Explore notebooks
-jupyter notebook notebooks/
+**Interactive Analysis**:
+```bash
+jupyter notebook notebooks/03_test_eval.ipynb
 ```
 
 ## 📊 Pipeline Steps
@@ -253,11 +285,83 @@ bash run_end_to_end.sh
 - **Slides**: `docs/slides.pdf` - Presentation deck (6-8 slides)
 - **Model Card**: `docs/model_card.md` - Chronos-2 model documentation
 
+## 🔧 Troubleshooting
+
+### **Issue: Package not found**
+```bash
+# Solution: Install missing package
+pip install <package-name>
+
+# Or reinstall all:
+pip install -r requirements.txt --force-reinstall
+```
+
+### **Issue: CUDA not available**
+```bash
+# Check GPU
+nvidia-smi
+
+# Check PyTorch CUDA
+python -c "import torch; print(torch.cuda.is_available())"
+
+# If False, reinstall PyTorch with CUDA:
+pip install torch --index-url https://download.pytorch.org/whl/cu118
+```
+
+### **Issue: Out of memory**
+**Solution**: Edit `configs/default.yaml`:
+```yaml
+models:
+  chronos:
+    device: "cpu"  # Change from "cuda" to "cpu"
+    model_name: "amazon/chronos-t5-small"  # Use smaller model
+```
+
+### **Issue: Pipeline hangs or fails**
+```bash
+# Check logs in terminal
+# Common causes:
+# 1. Internet connection (for data download)
+# 2. Disk space (need ~1GB free)
+# 3. Memory (need 8GB+ RAM)
+
+# Quick fix: Run with smaller dataset
+# Edit configs/default.yaml:
+data:
+  end_date: "2023-12-31"  # Use less data
+```
+
+### **Issue: Import errors**
+```bash
+# Make sure you're in the project directory
+cd D:\Major\Apply_Forcasting\final
+
+# Check Python path
+python -c "import sys; print('\n'.join(sys.path))"
+```
+
+## ❓ FAQ
+
+**Q: How long does the pipeline take?**
+A: 30-60 minutes with GPU, 2-3 hours with CPU
+
+**Q: Can I use a different Wikipedia page?**
+A: Yes! Edit `configs/default.yaml` → `data.page_title: "Your_Page"`
+
+**Q: Where are the results saved?**
+A: All in `artifacts/` folder (predictions, metrics, figures)
+
+**Q: Can I run this without a GPU?**
+A: Yes, set `device: "cpu"` in `configs/default.yaml`, but it's slower
+
+**Q: How do I cite this project?**
+A: See references section below
+
 ## 🤝 Contributing
 
 This is an academic project. For issues or questions:
 - Open an issue on GitHub
-- Check `docs/report.pdf` for methodology details
+- Check `docs/REPORT_TEMPLATE.md` for methodology details
 
 ## 📄 License
 
@@ -277,8 +381,14 @@ This project is for educational purposes. Data is from Wikipedia (CC BY-SA 3.0).
 
 ---
 
-**Status**: ✅ Production Ready
-**Last Updated**: December 2024
-**Contact**: [Your GitHub]
+## 📞 Support
+
+**Having issues?**
+1. Check [Troubleshooting](#-troubleshooting) section above
+2. Run `python test_setup.py` to diagnose problems
+3. Check GitHub Issues
+4. Review error messages carefully
+
+**Status**: ✅ Production Ready | **Last Updated**: December 2024
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
