@@ -173,7 +173,7 @@ python -c "import torch; print(f'Setup complete! CUDA: {torch.cuda.is_available(
 
 - Adjust CUDA version based on your system's GPU driver
 - GPU acceleration significantly speeds up Chronos model inference
-- Choose between chronos-forecasting (lighter, direct) or autogluon (full suite)
+- Choose between chronos-forecasting (lighter, direct) or autogluon (full suite).
 - Total installation size: ~5-8 GB depending on configurations
 
 ## Additional Resources
