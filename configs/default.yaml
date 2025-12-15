@@ -1,0 +1,105 @@
+# Default Configuration for Time Series Forecasting Project
+
+# Random seed for reproducibility
+random_seed: 42
+
+# Data Configuration
+data:
+  page_title: "Bitcoin"  # Wikipedia page to fetch
+  start_date: "2020-01-01"
+  end_date: "2024-12-31"
+  cache_dir: "data"
+  min_length: 500  # Minimum required time series length
+
+# Time Series Parameters
+ts_params:
+  frequency: "D"  # Daily
+  horizon: 30  # H = 30 days
+  seasonal_period: 7  # m = 7 (weekly seasonality)
+
+# Data Preprocessing
+preprocessing:
+  outlier_method: "winsorize"  # Options: winsorize, z_score, None
+  outlier_quantiles: [0.01, 0.99]  # For winsorization
+  missing_method: "forward_fill"  # Options: forward_fill, interpolate
+  forward_fill_limit: 2
+
+# Train/Val/Test Split
+splits:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+
+# Rolling-Origin Backtesting
+backtesting:
+  n_folds: 5  # Number of validation folds
+  method: "expanding"  # expanding window
+
+# Model Configuration
+models:
+  seasonal_naive:
+    seasonal_period: 7
+
+  ets:
+    seasonal: "add"
+    seasonal_periods: 7
+    trend: "add"
+
+  gradient_boosting:
+    model_type: "lightgbm"
+    n_estimators: 100
+    learning_rate: 0.05
+    max_depth: 5
+    lags: [1, 7, 14, 28]
+    rolling_windows: [7, 28]
+    use_day_of_week: true
+
+  chronos:
+    model_name: "amazon/chronos-t5-base"
+    device: "cuda"  # or "cpu"
+    batch_size: 32
+    num_samples: 20  # for probabilistic forecasting
+    quantile_levels: [0.1, 0.5, 0.9]
+    temperature: 1.0
+    top_k: 50
+    top_p: 1.0
+
+# Metrics
+metrics:
+  point_forecast:
+    - "mae"
+    - "rmse"
+    - "smape"
+    - "mase"
+
+  probabilistic:
+    - "pinball_loss"
+    - "coverage"
+    - "interval_width"
+
+  quantiles: [0.1, 0.5, 0.9]
+  primary_metric: "mase"  # For model selection
+
+# Statistical Testing
+stats_testing:
+  test_type: "wilcoxon"
+  alpha: 0.05
+
+# Computational Resources
+compute:
+  max_training_hours: 3
+  n_jobs: -1  # CPU cores for parallel processing
+
+# Output Paths
+output:
+  predictions_dir: "artifacts/predictions"
+  metrics_dir: "artifacts/metrics"
+  figures_dir: "artifacts/figures"
+  results_file: "artifacts/results_summary.yaml"
+
+# Plotting
+plotting:
+  style: "seaborn-v0_8-darkgrid"
+  figure_size: [12, 6]
+  dpi: 300
+  format: "png"
