@@ -1,0 +1,5 @@
+{
+  "model_name": "chronos",
+  "n_folds": 5,
+  "horizon": 30
+}

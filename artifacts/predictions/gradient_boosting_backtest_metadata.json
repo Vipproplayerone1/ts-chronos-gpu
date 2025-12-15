@@ -1,0 +1,5 @@
+{
+  "model_name": "gradient_boosting",
+  "n_folds": 5,
+  "horizon": 30
+}

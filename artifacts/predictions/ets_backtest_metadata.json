@@ -1,0 +1,5 @@
+{
+  "model_name": "ets",
+  "n_folds": 5,
+  "horizon": 30
+}
