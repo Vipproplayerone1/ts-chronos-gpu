@@ -108,8 +108,7 @@ library_versions:
     64 bit (AMD64)]
   scikit-learn: 1.7.2
   statsmodels: 0.14.6
-  torch: !!python/object/new:torch.torch_version.TorchVersion
-  - 2.5.1
+  torch: 2.5.1
   xgboost: 3.1.2
 model_rankings:
   chronos: 0.393785705879941
@@ -118,469 +117,119 @@ model_rankings:
   seasonal_naive: 0.3970091396271457
 test_metrics:
   chronos:
-    coverage_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - &id001 !!python/object/apply:numpy.dtype
-      args:
-      - f8
-      - false
-      - true
-      state: !!python/tuple
-      - 3
-      - <
-      - null
-      - null
-      - null
-      - -1
-      - -1
-      - 0
-    - !!binary |
-      auxhFpAvwj8=
-    mae: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      pt4rUJsopkA=
-    mase: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      lrqBLvPk8T8=
-    pinball_loss_0.1: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      EaJ9Em7reEA=
-    pinball_loss_0.5: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      pt4rUJsolkA=
-    pinball_loss_0.9: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      USeFYjmZoEA=
-    rmse: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      jbcvN9xxskA=
-    smape: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      acx9LEOHQkA=
-    width_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - &id002 !!python/object/apply:numpy.dtype
-      args:
-      - f4
-      - false
-      - true
-      state: !!python/tuple
-      - 3
-      - <
-      - null
-      - null
-      - null
-      - -1
-      - -1
-      - 0
-    - !!binary |
-      QjtARA==
+    coverage_80: 0.14207650273224043
+    mae: 2836.303346033982
+    mase: 1.1183959786100437
+    pinball_loss_0.1: 398.71437310290736
+    pinball_loss_0.5: 1418.151673016991
+    pinball_loss_0.9: 2124.61207977395
+    rmse: 4721.860217077553
+    smape: 37.056737481522596
+    width_80: 768.9259033203125
   ets:
-    coverage_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    mae: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      Xo82xttHu0A=
-    mase: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      NW94F9wHBkA=
-    pinball_loss_0.1: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      5aUrOBbThUA=
-    pinball_loss_0.5: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      Xo82xttHq0A=
-    pinball_loss_0.9: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      ohox/3iNuEA=
-    rmse: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      YhWJgHaCwEA=
-    smape: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      Asb9fCyxYkA=
-    width_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
+    coverage_80: 0.0
+    mae: 6983.8584932422655
+    mase: 2.753837760317675
+    pinball_loss_0.1: 698.3858493242266
+    pinball_loss_0.5: 3491.9292466211327
+    pinball_loss_0.9: 6285.4726439180395
+    rmse: 8452.92579759163
+    smape: 149.53668069424754
+    width_80: 0.0
   gradient_boosting:
-    coverage_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    mae: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      xLFUbVxmpUA=
-    mase: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      n3lv6hVI8T8=
-    pinball_loss_0.1: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      iulhipWqjkA=
-    pinball_loss_0.5: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      xLFUbVxmlUA=
-    pinball_loss_0.9: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      wm54FW53m0A=
-    rmse: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      xOvgK7aGsEA=
-    smape: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      FQS9eSnsQUA=
-    width_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
+    coverage_80: 0.0
+    mae: 2739.1805216280936
+    mase: 1.0800990255007503
+    pinball_loss_0.1: 981.3230178498645
+    pinball_loss_0.5: 1369.5902608140468
+    pinball_loss_0.9: 1757.8575037782289
+    rmse: 4230.711607034264
+    smape: 35.84501573304457
+    width_80: 0.0
   seasonal_naive:
-    coverage_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    mae: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      MDGPHzRypUA=
-    mase: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      e8Z1LqZR8T8=
-    pinball_loss_0.1: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      K1HxX/nAh0A=
-    pinball_loss_0.5: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      MDGPHzRylUA=
-    pinball_loss_0.9: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      yLklj+sDn0A=
-    rmse: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      D0BVKsI2sUA=
-    smape: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      QyClG67lQUA=
-    width_80: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
+    coverage_80: 0.0
+    mae: 2745.1018032786887
+    mase: 1.0824338736387336
+    pinball_loss_0.1: 760.1217650273223
+    pinball_loss_0.5: 1372.5509016393444
+    pinball_loss_0.9: 1984.9800382513658
+    rmse: 4406.75845845045
+    smape: 35.794375854137364
+    width_80: 0.0
 validation_metrics:
   chronos:
-    coverage_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      ThvotIFO2z8=
-    coverage_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      s4enoPeLsD8=
-    mae_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      oNMGukQ1j0A=
-    mae_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      BPHOGHXzaEA=
-    mase_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      aL4Y9sgz2T8=
-    mase_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      z8I7cjsmtD8=
-    pinball_loss_0.1_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      jZduEryGY0A=
-    pinball_loss_0.1_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      he09FKYBQEA=
-    pinball_loss_0.5_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      oNMGukQ1f0A=
-    pinball_loss_0.5_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      BPHOGHXzWEA=
-    pinball_loss_0.9_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      BoGVw9SdekA=
-    pinball_loss_0.9_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      TmBsMOWxZEA=
-    rmse_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      rGFhFMx9lUA=
-    rmse_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      T+2dUN67ekA=
-    smape_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      UNcciP6sMEA=
-    smape_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      KX80wriM/z8=
-    width_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id002
-    - !!binary |
-      SoKbRA==
-    width_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id002
-    - !!binary |
-      Af6KQw==
+    coverage_80_mean: 0.42666666666666664
+    coverage_80_std: 0.06463573143221772
+    mae_mean: 998.6585579427083
+    mae_std: 199.60804405611282
+    mase_mean: 0.393785705879941
+    mase_std: 0.07870837725546241
+    pinball_loss_0.1_mean: 156.2104580078125
+    pinball_loss_0.1_std: 32.012880830991925
+    pinball_loss_0.5_mean: 499.32927897135414
+    pinball_loss_0.5_std: 99.80402202805641
+    pinball_loss_0.9_mean: 425.8644443359375
+    pinball_loss_0.9_std: 165.55922719161248
+    rmse_mean: 1375.4492964950432
+    rmse_std: 427.7417761010192
+    smape_mean: 16.675758845368648
+    smape_std: 1.9718558870444645
+    width_80_mean: 1244.071533203125
+    width_80_std: 277.9844055175781
   ets:
-    coverage_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    coverage_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    mae_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      Hh6k3ashlEA=
-    mae_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      2xR+6nAQV0A=
-    mase_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      VdCKX+FB4D8=
-    mase_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      ft2NVSugoj8=
-    pinball_loss_0.1_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      ENCl0rX2aUA=
-    pinball_loss_0.1_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      BLseUbe9U0A=
-    pinball_loss_0.5_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      Hh6k3ashhEA=
-    pinball_loss_0.5_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      2xR+6nAQR0A=
-    pinball_loss_0.9_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      G2RPI9XikEA=
-    pinball_loss_0.9_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      18WK/H0NX0A=
-    rmse_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      HqzEpAn5mUA=
-    rmse_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      7DlVjiYrdEA=
-    smape_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      3qwaCVv8NkA=
-    smape_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      tiOBTiMrCkA=
-    width_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    width_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
+    coverage_80_mean: 0.0
+    coverage_80_std: 0.0
+    mae_mean: 1288.4178376811392
+    mae_std: 92.25689184487003
+    mase_mean: 0.5080420366343882
+    mase_std: 0.03637824458467785
+    pinball_loss_0.1_mean: 207.70969517121603
+    pinball_loss_0.1_std: 78.9643137741187
+    pinball_loss_0.5_mean: 644.2089188405696
+    pinball_loss_0.5_std: 46.12844592243501
+    pinball_loss_0.9_mean: 1080.708142509923
+    pinball_loss_0.9_std: 124.21081460525544
+    rmse_mean: 1662.2594176034977
+    rmse_std: 322.6969130829955
+    smape_mean: 22.98576409245731
+    smape_std: 3.271063435855889
+    width_80_mean: 0.0
+    width_80_std: 0.0
   gradient_boosting:
-    coverage_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    coverage_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    mae_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      g/oqrGtKi0A=
-    mae_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      uxXQ1EhQckA=
-    mase_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      1k87xO0J1j8=
-    mase_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      OaBZwxuUvT8=
-    pinball_loss_0.1_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      BotQFtKUfkA=
-    pinball_loss_0.1_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      JDkshjemWkA=
-    pinball_loss_0.5_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      g/oqrGtKe0A=
-    pinball_loss_0.5_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      uxXQ1EhQYkA=
-    pinball_loss_0.9_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AmoFQgUAeEA=
-    pinball_loss_0.9_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      FvFhDmVOaUA=
-    rmse_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      v6/R4hH5kUA=
-    rmse_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      O+foayx3fUA=
-    smape_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      A8MnwMGFLEA=
-    smape_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      ju6f4WvyDkA=
-    width_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    width_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
+    coverage_80_mean: 0.0
+    coverage_80_std: 0.0
+    mae_mean: 873.3025744779301
+    mae_std: 293.0177810791317
+    mase_mean: 0.344356004364497
+    mase_std: 0.1155412055901487
+    pinball_loss_0.1_mean: 489.30129081213124
+    pinball_loss_0.1_std: 106.59713892286942
+    pinball_loss_0.5_mean: 436.65128723896504
+    pinball_loss_0.5_std: 146.50889053956584
+    pinball_loss_0.9_mean: 384.00128366579895
+    pinball_loss_0.9_std: 202.44983595971343
+    rmse_mean: 1150.2674668086545
+    rmse_std: 471.44834509828405
+    smape_mean: 14.261243824819308
+    smape_std: 3.868369829838975
+    width_80_mean: 0.0
+    width_80_std: 0.0
   seasonal_naive:
-    coverage_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    coverage_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    mae_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      q6qqqqp2j0A=
-    mae_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      CI66x0thbkA=
-    mase_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      Glm6BZlo2T8=
-    mase_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      b5Ck9JqIuD8=
-    pinball_loss_0.1_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      ILByaJHpeUA=
-    pinball_loss_0.1_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      8Wil2lvdZkA=
-    pinball_loss_0.5_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      q6qqqqp2f0A=
-    pinball_loss_0.5_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      CI66x0thXkA=
-    pinball_loss_0.9_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      m1Jx9uGBgkA=
-    pinball_loss_0.9_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      UKXqJ+9LY0A=
-    rmse_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      uoqGq90OlUA=
-    rmse_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      b5sI12kQeEA=
-    smape_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      PldPTeSRMEA=
-    smape_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      jAXBvLsQB0A=
-    width_80_mean: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
-    width_80_std: !!python/object/apply:numpy._core.multiarray.scalar
-    - *id001
-    - !!binary |
-      AAAAAAAAAAA=
+    coverage_80_mean: 0.0
+    coverage_80_std: 0.0
+    mae_mean: 1006.8333333333334
+    mae_std: 243.0405005115174
+    mase_mean: 0.3970091396271457
+    mase_std: 0.09583443138814272
+    pinball_loss_0.1_mean: 414.59799999999996
+    pinball_loss_0.1_std: 182.917462657038
+    pinball_loss_0.5_mean: 503.4166666666667
+    pinball_loss_0.5_std: 121.5202502557587
+    pinball_loss_0.9_mean: 592.2353333333334
+    pinball_loss_0.9_std: 154.37294383839844
+    rmse_mean: 1347.716474630563
+    rmse_std: 385.0258398376672
+    smape_mean: 16.569889861936865
+    smape_std: 2.883170580521158
+    width_80_mean: 0.0
+    width_80_std: 0.0

@@ -125,10 +125,29 @@ def load_metrics(
         return json.load(f)
 
 
+def _convert_to_python_types(obj):
+    """Recursively convert numpy types to Python native types."""
+    import numpy as np
+
+    if isinstance(obj, dict):
+        return {key: _convert_to_python_types(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [_convert_to_python_types(item) for item in obj]
+    elif isinstance(obj, np.generic):
+        return obj.item()  # Convert numpy scalar to Python type
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()  # Convert numpy array to list
+    else:
+        return obj
+
+
 def save_yaml(data: dict, filepath: str):
-    """Save dictionary to YAML file."""
+    """Save dictionary to YAML file, converting numpy types to Python types."""
+    # Convert all numpy types to Python native types
+    data_converted = _convert_to_python_types(data)
+
     with open(filepath, 'w') as f:
-        yaml.dump(data, f, default_flow_style=False)
+        yaml.dump(data_converted, f, default_flow_style=False, sort_keys=False)
 
 
 def load_yaml(filepath: str) -> dict:
@@ -161,10 +180,10 @@ def get_library_versions() -> dict:
     # Try to get versions of optional libraries
     try:
         import torch
-        versions['torch'] = torch.__version__
+        versions['torch'] = str(torch.__version__)  # Convert to string explicitly
         versions['cuda_available'] = torch.cuda.is_available()
         if torch.cuda.is_available():
-            versions['cuda_version'] = torch.version.cuda
+            versions['cuda_version'] = str(torch.version.cuda)  # Convert to string
     except ImportError:
         pass
 
