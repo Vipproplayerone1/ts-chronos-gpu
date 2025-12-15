@@ -45,7 +45,7 @@ def plot_time_series(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -83,7 +83,7 @@ def plot_train_val_test_split(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -137,7 +137,7 @@ def plot_forecasts_with_history(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -180,7 +180,7 @@ def plot_metrics_by_fold(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -221,7 +221,7 @@ def plot_error_by_horizon(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -294,7 +294,7 @@ def plot_calibration_curve(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -355,7 +355,7 @@ def plot_residuals_analysis(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -390,7 +390,7 @@ def plot_feature_importance(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -445,7 +445,7 @@ def plot_seasonality_decomposition(
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
-        print(f"✓ Saved plot to {save_path}")
+        print(f"[OK] Saved plot to {save_path}")
 
     plt.show()
 
@@ -468,4 +468,4 @@ def create_all_plots(
     # Add plot generation calls here based on available data
     # This is a template that will be called from main execution script
 
-    print(f"✓ All plots saved to {output_dir}")
+    print(f"[OK] All plots saved to {output_dir}")

@@ -63,7 +63,7 @@ def save_predictions(
 
     filepath = output_path / f"{model_name}_predictions.parquet"
     predictions.to_parquet(filepath, index=False)
-    print(f"✓ Saved predictions to {filepath}")
+    print(f"[OK] Saved predictions to {filepath}")
 
 
 def load_predictions(
@@ -103,7 +103,7 @@ def save_metrics(
     filepath = output_path / f"{model_name}_metrics.json"
     with open(filepath, 'w') as f:
         json.dump(metrics, f, indent=2, default=str)
-    print(f"✓ Saved metrics to {filepath}")
+    print(f"[OK] Saved metrics to {filepath}")
 
 
 def load_metrics(

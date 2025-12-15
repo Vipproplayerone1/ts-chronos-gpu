@@ -50,7 +50,7 @@ class TimeSeriesPreprocessor:
         n_missing_before = df['y'].isna().sum()
 
         if n_missing_before == 0:
-            print("✓ No missing values found")
+            print("[OK] No missing values found")
             return df
 
         print(f"Found {n_missing_before} missing values ({n_missing_before/len(df)*100:.2f}%)")
@@ -73,7 +73,7 @@ class TimeSeriesPreprocessor:
             # Drop remaining missing values
             df = df.dropna(subset=['y'])
 
-        print(f"✓ Imputed {n_missing_before - n_missing_after} missing values using {self.missing_method}")
+        print(f"[OK] Imputed {n_missing_before - n_missing_after} missing values using {self.missing_method}")
 
         return df
 
@@ -89,7 +89,7 @@ class TimeSeriesPreprocessor:
             DataFrame with outliers handled
         """
         if self.outlier_method is None or self.outlier_method == "None":
-            print("✓ Skipping outlier handling")
+            print("[OK] Skipping outlier handling")
             return df
 
         df = df.copy()
@@ -101,7 +101,7 @@ class TimeSeriesPreprocessor:
                     df['y'].quantile(lower_q),
                     df['y'].quantile(upper_q)
                 )
-                print(f"✓ Outlier bounds (winsorization): [{self.outlier_bounds_[0]:.1f}, {self.outlier_bounds_[1]:.1f}]")
+                print(f"[OK] Outlier bounds (winsorization): [{self.outlier_bounds_[0]:.1f}, {self.outlier_bounds_[1]:.1f}]")
 
             if self.outlier_bounds_ is not None:
                 lower_bound, upper_bound = self.outlier_bounds_
@@ -109,14 +109,14 @@ class TimeSeriesPreprocessor:
 
                 df['y'] = df['y'].clip(lower=lower_bound, upper=upper_bound)
 
-                print(f"✓ Handled {n_outliers} outliers ({n_outliers/len(df)*100:.2f}%) using winsorization")
+                print(f"[OK] Handled {n_outliers} outliers ({n_outliers/len(df)*100:.2f}%) using winsorization")
 
         elif self.outlier_method == "z_score":
             if fit:
                 mean_y = df['y'].mean()
                 std_y = df['y'].std()
                 self.outlier_bounds_ = (mean_y, std_y)
-                print(f"✓ Outlier detection (z-score): mean={mean_y:.1f}, std={std_y:.1f}")
+                print(f"[OK] Outlier detection (z-score): mean={mean_y:.1f}, std={std_y:.1f}")
 
             if self.outlier_bounds_ is not None:
                 mean_y, std_y = self.outlier_bounds_
@@ -128,7 +128,7 @@ class TimeSeriesPreprocessor:
                 df.loc[outliers & (df['y'] > mean_y), 'y'] = mean_y + self.z_score_threshold * std_y
                 df.loc[outliers & (df['y'] < mean_y), 'y'] = mean_y - self.z_score_threshold * std_y
 
-                print(f"✓ Handled {n_outliers} outliers ({n_outliers/len(df)*100:.2f}%) using z-score (threshold={self.z_score_threshold})")
+                print(f"[OK] Handled {n_outliers} outliers ({n_outliers/len(df)*100:.2f}%) using z-score (threshold={self.z_score_threshold})")
 
         else:
             raise ValueError(f"Unknown outlier_method: {self.outlier_method}")
@@ -158,7 +158,7 @@ class TimeSeriesPreprocessor:
                 print(f"Gap distribution: {inconsistent.value_counts().head()}")
                 return False
 
-            print("✓ Validated consistent daily frequency")
+            print("[OK] Validated consistent daily frequency")
             return True
 
         return True
@@ -203,7 +203,7 @@ class TimeSeriesPreprocessor:
         self.preprocessing_stats_['final_min'] = df['y'].min()
         self.preprocessing_stats_['final_max'] = df['y'].max()
 
-        print(f"\n✓ Preprocessing complete: {len(df)} records")
+        print(f"\n[OK] Preprocessing complete: {len(df)} records")
         return df
 
     def transform(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -228,7 +228,7 @@ class TimeSeriesPreprocessor:
         # Handle outliers (fit=False, use training bounds)
         df = self.detect_and_handle_outliers(df, fit=False)
 
-        print(f"✓ Preprocessing complete: {len(df)} records")
+        print(f"[OK] Preprocessing complete: {len(df)} records")
         return df
 
 

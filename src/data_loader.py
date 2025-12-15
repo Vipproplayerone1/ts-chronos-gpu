@@ -160,7 +160,7 @@ class WikipediaPageviewsLoader:
         if use_cache:
             cached_df = self._load_cache(cache_path)
             if cached_df is not None:
-                print(f"✓ Loaded data from cache: {cache_path}")
+                print(f"[OK] Loaded data from cache: {cache_path}")
                 cached_df = cached_df.rename(columns={'timestamp': 'ds'})
                 return cached_df
 
@@ -178,7 +178,7 @@ class WikipediaPageviewsLoader:
             'num_records': len(df)
         }
         self._save_cache(df, cache_path, metadata)
-        print(f"✓ Data cached to: {cache_path}")
+        print(f"[OK] Data cached to: {cache_path}")
 
         # Rename columns to standard names
         df = df.rename(columns={'timestamp': 'ds'})

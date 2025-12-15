@@ -319,4 +319,4 @@ def save_backtest_results(
         with open(metadata_filepath, 'w') as f:
             json.dump(metadata, f, indent=2, default=str)
 
-        print(f"✓ Saved {model_name} backtest results to {filepath}")
+        print(f"[OK] Saved {model_name} backtest results to {filepath}")

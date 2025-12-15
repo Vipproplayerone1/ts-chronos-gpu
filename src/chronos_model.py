@@ -69,7 +69,7 @@ class ChronosModel:
                 device_map=self.device,
                 torch_dtype=self.torch_dtype
             )
-            print("✓ Model loaded successfully")
+            print("[OK] Model loaded successfully")
 
     def fit(self, train_df: pd.DataFrame):
         """
@@ -85,7 +85,7 @@ class ChronosModel:
         self.context_df = train_df.copy()
         self.context = torch.tensor(train_df['y'].values, dtype=self.torch_dtype)
 
-        print(f"✓ Context stored: {len(train_df)} time steps")
+        print(f"[OK] Context stored: {len(train_df)} time steps")
 
     def predict(self, horizon: int) -> np.ndarray:
         """
