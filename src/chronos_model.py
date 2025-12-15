@@ -103,7 +103,7 @@ class ChronosModel:
         # Generate forecasts
         with torch.no_grad():
             forecast_samples = self.pipeline.predict(
-                context=self.context.unsqueeze(0),  # Add batch dimension
+                inputs=self.context.unsqueeze(0),  # Add batch dimension
                 prediction_length=horizon,
                 num_samples=self.num_samples,
                 temperature=self.temperature,
@@ -141,7 +141,7 @@ class ChronosModel:
         # Generate forecast samples
         with torch.no_grad():
             forecast_samples = self.pipeline.predict(
-                context=self.context.unsqueeze(0),
+                inputs=self.context.unsqueeze(0),
                 prediction_length=horizon,
                 num_samples=self.num_samples,
                 temperature=self.temperature,

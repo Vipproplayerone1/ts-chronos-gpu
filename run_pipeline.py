@@ -200,23 +200,33 @@ def main(config_path: str = "configs/default.yaml"):
     # 7. Statistical significance testing
     print("\n[7/9] Performing statistical significance tests...")
 
-    best_baseline = rankings[0][0] if rankings[0][0] != 'chronos' else rankings[1][0]
-    print(f"[OK] Best baseline: {best_baseline}")
+    # Find best baseline (non-chronos model)
+    best_baseline = None
+    for model_name, score in rankings:
+        if model_name != 'chronos':
+            best_baseline = model_name
+            break
 
-    comparison_df = compare_all_models(
-        backtest_results=backtest_results,
-        baseline_model=best_baseline,
-        test_type=config['stats_testing']['test_type'],
-        alpha=config['stats_testing']['alpha']
-    )
+    if best_baseline is None:
+        print("[WARN] No valid baseline models found for comparison. Skipping statistical tests.")
+        comparison_df = None
+    else:
+        print(f"[OK] Best baseline: {best_baseline}")
 
-    print_statistical_test_results(comparison_df)
+        comparison_df = compare_all_models(
+            backtest_results=backtest_results,
+            baseline_model=best_baseline,
+            test_type=config['stats_testing']['test_type'],
+            alpha=config['stats_testing']['alpha']
+        )
 
-    # Save comparison results
-    comparison_df.to_csv(
-        f"{config['output']['metrics_dir']}/statistical_tests.csv",
-        index=False
-    )
+        print_statistical_test_results(comparison_df)
+
+        # Save comparison results
+        comparison_df.to_csv(
+            f"{config['output']['metrics_dir']}/statistical_tests.csv",
+            index=False
+        )
 
     # 8. Final evaluation on test set
     print("\n[8/9] Final evaluation on test set...")
