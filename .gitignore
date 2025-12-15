@@ -46,14 +46,18 @@ data/*.parquet
 data/*.json
 !data/.gitkeep
 
-# Artifacts
+# Artifacts (generated files)
 artifacts/predictions/*.csv
 artifacts/predictions/*.parquet
 artifacts/metrics/*.json
 artifacts/metrics/*.yaml
+artifacts/metrics/*.csv
 artifacts/figures/*.png
 artifacts/figures/*.pdf
 !artifacts/**/.gitkeep
+
+# Keep results summary (important for reproducibility)
+!artifacts/results_summary.yaml
 
 # OS
 .DS_Store
@@ -66,7 +70,7 @@ checkpoints/
 *.pth
 *.pkl
 
-# Reports
+# Reports & Documents
 *.aux
 *.log
 *.out
@@ -74,3 +78,22 @@ checkpoints/
 *.synctex.gz
 *.fdb_latexmk
 *.fls
+
+# Word/Office temporary files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+*.tmp
+
+# Documentation (development only - optional)
+# Uncomment these lines to ignore verification docs after submission
+# ALL_DOCUMENTATION.md
+# REQUIREMENTS_VERIFICATION.md
+# UNNECESSARY_FILES.md
+# docs/REPORT_TEMPLATE.md
+# docs/SLIDES_TEMPLATE.md
+# docs/README.md
+
+# Source documents after conversion to PDF
+# Uncomment after you've created final PDFs
+# docs/*.docx
