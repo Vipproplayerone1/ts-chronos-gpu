@@ -1,0 +1,20 @@
+{
+  "mae_mean": 873.3025744779301,
+  "mae_std": 293.0177810791317,
+  "rmse_mean": 1150.2674668086545,
+  "rmse_std": 471.44834509828405,
+  "smape_mean": 14.261243824819308,
+  "smape_std": 3.868369829838975,
+  "mase_mean": 0.344356004364497,
+  "mase_std": 0.1155412055901487,
+  "pinball_loss_0.1_mean": 489.30129081213124,
+  "pinball_loss_0.1_std": 106.59713892286942,
+  "pinball_loss_0.5_mean": 436.65128723896504,
+  "pinball_loss_0.5_std": 146.50889053956584,
+  "pinball_loss_0.9_mean": 384.00128366579895,
+  "pinball_loss_0.9_std": 202.44983595971343,
+  "coverage_80_mean": 0.0,
+  "coverage_80_std": 0.0,
+  "width_80_mean": 0.0,
+  "width_80_std": 0.0
+}

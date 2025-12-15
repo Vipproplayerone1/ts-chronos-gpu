@@ -40,25 +40,6 @@ venv.bak/
 *.swo
 *~
 
-# Data (large files)
-data/*.csv
-data/*.parquet
-data/*.json
-!data/.gitkeep
-
-# Artifacts (generated files)
-artifacts/predictions/*.csv
-artifacts/predictions/*.parquet
-artifacts/metrics/*.json
-artifacts/metrics/*.yaml
-artifacts/metrics/*.csv
-artifacts/figures/*.png
-artifacts/figures/*.pdf
-!artifacts/**/.gitkeep
-
-# Keep results summary (important for reproducibility)
-!artifacts/results_summary.yaml
-
 # OS
 .DS_Store
 Thumbs.db
@@ -78,12 +59,6 @@ checkpoints/
 *.synctex.gz
 *.fdb_latexmk
 *.fls
-
-# Word/Office temporary files
-~$*.docx
-~$*.xlsx
-~$*.pptx
-*.tmp
 
 # Documentation (development only - optional)
 # Uncomment these lines to ignore verification docs after submission
