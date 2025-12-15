@@ -1,5 +1,15 @@
 # Time Series Forecasting Project Requirements
 # Python 3.10+
+#
+# IMPORTANT FOR CONDA USERS:
+# 1. First install PyTorch via conda:
+#    conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
+# 2. Then install other packages:
+#    pip install -r requirements.txt
+#
+# For pip-only users (not recommended):
+#    Install PyTorch first: pip install torch --index-url https://download.pytorch.org/whl/cu118
+#    Then: pip install -r requirements.txt
 
 # Core ML/Data Science
 pandas==2.1.4
@@ -23,9 +33,10 @@ xgboost==2.0.3
 # Chronos Model
 chronos-forecasting==2.0.0
 
-# PyTorch (for Chronos)
-torch==2.1.2
---extra-index-url https://download.pytorch.org/whl/cu118
+# NOTE: PyTorch should be installed via conda BEFORE installing this requirements.txt
+# Run: conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
+# (or pytorch-cuda=12.1 for CUDA 12.1)
+# DO NOT pip install torch when using conda environment
 
 # Utilities
 tqdm==4.66.1
