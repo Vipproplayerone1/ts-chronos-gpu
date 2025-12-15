@@ -103,7 +103,7 @@ final/
 
 ```bash
 # 1. Clone repository
-git clone <your-repo-url>
+git clone https://github.com/Vipproplayerone1/ts-chronos-gpu.git
 cd final
 
 # 2. Create conda environment
@@ -124,7 +124,7 @@ python test_setup.py
 
 ```bash
 # 1. Clone repository
-git clone <your-repo-url>
+git clone https://github.com/Vipproplayerone1/ts-chronos-gpu.git
 cd final
 
 # 2. Create virtual environment
@@ -502,7 +502,7 @@ All notebooks include full execution outputs:
 This is an academic project. For questions or suggestions:
 1. Open an issue
 2. Submit a pull request
-3. Contact: [Your Email]
+3. Contact: [nhan.bui210409@vnuk.edu.vn]
 
 ---
 
@@ -526,18 +526,18 @@ MIT License - See LICENSE file for details
 ## 📞 Contact & Citation
 
 ### Contact
-- **Author**: [Your Name]
-- **Email**: [Your Email]
-- **GitHub**: [Your GitHub]
+- **Author**: [Bui Hoang Nhan]
+- **Email**: [nhan.bui210409@vnuk.edu.vn]
+- **GitHub**: [https://github.com/Vipproplayerone1/ts-chronos-gpu.git]
 
 ### Citation
 If you use this work, please cite:
 ```bibtex
 @misc{bitcoin_pageviews_forecasting_2025,
-  author = {[Your Name]},
+  author = {[Bui Hoang Nhan]},
   title = {Time Series Forecasting with Chronos-2: Bitcoin Wikipedia Pageviews},
   year = {2025},
-  url = {[Your Repo URL]}
+  url = {[https://github.com/Vipproplayerone1/ts-chronos-gpu.git]}
 }
 ```
 
