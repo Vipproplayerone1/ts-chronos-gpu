@@ -1,0 +1,4 @@
+model,baseline,test,statistic,p_value,significant,mean_error_model,mean_error_baseline,interpretation
+seasonal_naive,gradient_boosting,Wilcoxon Signed-Rank Test,4527.0,0.033132024102380565,True,1006.8333333333334,873.3025744779301,gradient_boosting significantly outperforms seasonal_naive (p=0.0331 < 0.05)
+ets,gradient_boosting,Wilcoxon Signed-Rank Test,3093.0,1.428422619155538e-06,True,1288.4178376811394,873.3025744779301,gradient_boosting significantly outperforms ets (p=0.0000 < 0.05)
+chronos,gradient_boosting,Wilcoxon Signed-Rank Test,4601.5,0.04651492104067064,True,998.6585579427083,873.3025744779301,gradient_boosting significantly outperforms chronos (p=0.0465 < 0.05)

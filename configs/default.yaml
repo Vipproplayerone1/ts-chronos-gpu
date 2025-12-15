@@ -78,7 +78,7 @@ metrics:
     - "interval_width"
 
   quantiles: [0.1, 0.5, 0.9]
-  primary_metric: "mase"  # For model selection
+  primary_metric: "mase_mean"  # For model selection (use _mean for validation metrics)
 
 # Statistical Testing
 stats_testing:
