@@ -70,10 +70,10 @@ def main(config_path: str = "configs/default.yaml"):
     config = load_config(config_path)
     config.create_output_dirs()
 
-    print(f"✓ Random seed: {config.random_seed}")
-    print(f"✓ Page: {config.page_title}")
-    print(f"✓ Horizon: {config.horizon} days")
-    print(f"✓ Seasonal period: {config.seasonal_period} days")
+    print(f"[OK] Random seed: {config.random_seed}")
+    print(f"[OK] Page: {config.page_title}")
+    print(f"[OK] Horizon: {config.horizon} days")
+    print(f"[OK] Seasonal period: {config.seasonal_period} days")
 
     # Print library versions for reproducibility
     print_library_versions()
@@ -87,8 +87,8 @@ def main(config_path: str = "configs/default.yaml"):
         cache_dir=config['data']['cache_dir']
     )
 
-    print(f"✓ Loaded {len(raw_df)} records")
-    print(f"✓ Date range: {raw_df['ds'].min()} to {raw_df['ds'].max()}")
+    print(f"[OK] Loaded {len(raw_df)} records")
+    print(f"[OK] Date range: {raw_df['ds'].min()} to {raw_df['ds'].max()}")
 
     # Verify minimum length
     if len(raw_df) < config['data']['min_length']:
@@ -100,7 +100,7 @@ def main(config_path: str = "configs/default.yaml"):
     print("\n[3/9] Preprocessing data...")
     clean_df, preprocessor = preprocess_data(raw_df, config.config, fit=True)
 
-    print(f"✓ Clean data: {len(clean_df)} records")
+    print(f"[OK] Clean data: {len(clean_df)} records")
 
     # 4. Create train/val/test splits
     print("\n[4/9] Creating train/val/test splits...")
@@ -115,7 +115,7 @@ def main(config_path: str = "configs/default.yaml"):
     train_df.to_parquet("data/train.parquet", index=False)
     val_df.to_parquet("data/val.parquet", index=False)
     test_df.to_parquet("data/test.parquet", index=False)
-    print("✓ Saved splits to data/")
+    print("[OK] Saved splits to data/")
 
     # Plot splits
     plot_train_val_test_split(
@@ -135,7 +135,7 @@ def main(config_path: str = "configs/default.yaml"):
     # Add Chronos model
     models['chronos'] = create_chronos_model(config.config)
 
-    print(f"✓ Models to evaluate: {list(models.keys())}")
+    print(f"[OK] Models to evaluate: {list(models.keys())}")
 
     # Run backtesting
     backtest_results = backtest_multiple_models(
@@ -201,7 +201,7 @@ def main(config_path: str = "configs/default.yaml"):
     print("\n[7/9] Performing statistical significance tests...")
 
     best_baseline = rankings[0][0] if rankings[0][0] != 'chronos' else rankings[1][0]
-    print(f"✓ Best baseline: {best_baseline}")
+    print(f"[OK] Best baseline: {best_baseline}")
 
     comparison_df = compare_all_models(
         backtest_results=backtest_results,
@@ -245,7 +245,7 @@ def main(config_path: str = "configs/default.yaml"):
         else:
             test_predictions[model_name] = model.predict(horizon=len(test_df))
 
-        print(f"✓ {model_name} predictions generated")
+        print(f"[OK] {model_name} predictions generated")
 
     # Compute test metrics
     test_metrics = {}
@@ -321,10 +321,10 @@ def main(config_path: str = "configs/default.yaml"):
     print("\n" + "="*100)
     print(" PIPELINE COMPLETE!")
     print("="*100)
-    print(f"\n✓ Results saved to: {config['output']['results_file']}")
-    print(f"✓ Predictions saved to: {config['output']['predictions_dir']}")
-    print(f"✓ Metrics saved to: {config['output']['metrics_dir']}")
-    print(f"✓ Figures saved to: {config['output']['figures_dir']}")
+    print(f"\n[OK] Results saved to: {config['output']['results_file']}")
+    print(f"[OK] Predictions saved to: {config['output']['predictions_dir']}")
+    print(f"[OK] Metrics saved to: {config['output']['metrics_dir']}")
+    print(f"[OK] Figures saved to: {config['output']['figures_dir']}")
 
 
 if __name__ == "__main__":
@@ -341,7 +341,7 @@ if __name__ == "__main__":
     try:
         main(args.config)
     except Exception as e:
-        print(f"\n❌ Pipeline failed with error: {e}")
+        print(f"\n[FAIL] Pipeline failed with error: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
