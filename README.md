@@ -4,27 +4,32 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1-red.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A comprehensive time series forecasting project comparing **Chronos-2** foundation model against classical baselines on Bitcoin Wikipedia pageviews prediction.
+A comprehensive time series forecasting project comparing **Chronos-2** foundation models (zero-shot and fine-tuned) against classical baselines on Bitcoin Wikipedia pageviews prediction.
 
 ## 📊 Project Overview
 
-This project investigates whether modern foundation models (Chronos-2) can outperform domain-tuned classical methods for univariate time series forecasting. We use **Bitcoin Wikipedia pageviews** as our dataset and implement rigorous evaluation with rolling-origin backtesting.
+This project investigates whether modern foundation models (Chronos-2) can outperform domain-tuned classical methods for univariate time series forecasting. We compare both **zero-shot** and **fine-tuned** variants of Chronos-2 against classical baselines using **Bitcoin Wikipedia pageviews** as our dataset with rigorous rolling-origin backtesting.
 
 ### Key Results
 
 - **Best Model**: Gradient Boosting (MASE: 0.344)
-- **Chronos-2**: Competitive zero-shot performance (MASE: 0.394)
-- **Statistical Significance**: All comparisons significant (p<0.05, Wilcoxon test)
+- **Chronos-2 Fine-Tuned**: 2nd place (MASE: 0.373) - **5.3% improvement** over zero-shot
+- **Chronos-2 Zero-Shot**: Competitive performance (MASE: 0.394)
+- **Fine-Tuning Impact**: Statistically significant improvement (p<0.05, Wilcoxon test)
 - **Dataset**: 1,827 daily observations (2020-2024)
 - **Forecast Horizon**: 30 days ahead
 
 ---
 
-## 🎯 Research Question
+## 🎯 Research Questions
 
-**Can zero-shot foundation models (Chronos-2) match or exceed domain-specific models on Wikipedia pageview forecasting?**
+**Q1: Can zero-shot foundation models (Chronos-2) match or exceed domain-specific models on Wikipedia pageview forecasting?**
 
-**Answer**: Gradient Boosting with carefully engineered lag features outperforms Chronos-2 by 13% on this dataset, but Chronos-2 shows competitive zero-shot performance without any domain-specific tuning.
+**A1**: Gradient Boosting with carefully engineered lag features outperforms zero-shot Chronos-2 by 13% on this dataset, but Chronos-2 shows competitive zero-shot performance without any domain-specific tuning.
+
+**Q2: Does fine-tuning Chronos-2 on domain data improve forecasting performance?**
+
+**A2**: Yes. Fine-tuning Chronos-2 on Bitcoin pageviews achieves **5.3% improvement** over zero-shot (MASE: 0.373 vs 0.394), placing it 2nd among all 5 models. This demonstrates the value of domain adaptation for foundation models.
 
 ---
 
@@ -39,13 +44,14 @@ final/
 ├── configs/
 │   └── default.yaml                   # All hyperparameters
 │
-├── src/                               # Source code (11 modules)
+├── src/                               # Source code (12 modules)
 │   ├── config.py                      # Configuration management
 │   ├── data_loader.py                 # Wikipedia API data fetching
 │   ├── preprocess.py                  # Data cleaning & preprocessing
 │   ├── features.py                    # Feature engineering (lags, rolling)
 │   ├── baselines.py                   # Seasonal Naive, ETS, GB models
-│   ├── chronos_model.py               # Chronos-2 wrapper
+│   ├── chronos_model.py               # Chronos-2 zero-shot wrapper
+│   ├── chronos_finetuned.py           # Chronos-2 fine-tuned model [NEW]
 │   ├── backtesting.py                 # Rolling-origin backtesting
 │   ├── metrics.py                     # All evaluation metrics
 │   ├── stats_tests.py                 # Statistical significance tests
@@ -63,9 +69,10 @@ final/
 │   └── test.parquet                   # Test split
 │
 ├── artifacts/                         # Generated results
-│   ├── predictions/                   # Model predictions (4 models)
+│   ├── predictions/                   # Model predictions (5 models)
 │   ├── metrics/                       # Evaluation metrics (JSON/CSV)
-│   ├── figures/                       # Publication-quality plots (8 plots)
+│   ├── figures/                       # Publication-quality plots (12+ plots)
+│   ├── checkpoints/                   # Fine-tuned model checkpoints [NEW]
 │   └── results_summary.yaml           # Complete results
 │
 ├── docs/                              # Documentation
@@ -85,11 +92,13 @@ final/
     └── test_setup.py                  # Environment verification
 ```
 
-**Total**: 11 source modules, 3 notebooks, 3,228 lines of code
+**Total**: 12 source modules, 3 notebooks, ~4,100 lines of code
 
 ---
 
 ## 🚀 Quick Start
+
+> **📘 For detailed instructions, troubleshooting, and advanced usage, see [USER_MANUAL.md](USER_MANUAL.md)**
 
 ### Prerequisites
 
@@ -206,9 +215,9 @@ chmod +x run_end_to_end.sh
 - **Validation MASE**: 0.344 (BEST)
 - **Top features**: lag_7 (35%), lag_1 (22%), rolling_mean_7 (18%)
 
-### 2. Foundation Model
+### 2. Foundation Models
 
-#### Chronos-2 (T5-Base)
+#### Chronos-2 Zero-Shot (T5-Base)
 - **Checkpoint**: amazon/chronos-t5-base
 - **Version**: 2.2.0
 - **Mode**: Zero-shot (no fine-tuning)
@@ -217,6 +226,20 @@ chmod +x run_end_to_end.sh
 - **Samples**: 20 per prediction
 - **Validation MASE**: 0.394
 - **Advantages**: No domain tuning, probabilistic intervals
+
+#### Chronos-2 Fine-Tuned (T5-Base) ⭐ NEW
+- **Checkpoint**: amazon/chronos-t5-base
+- **Mode**: Fine-tuned on Bitcoin pageviews
+- **Training**: 25 epochs with early stopping
+- **Optimization**:
+  - Mixed precision (bfloat16) for 4GB VRAM
+  - Gradient accumulation (effective batch size=32)
+  - Learning rate: 3e-5 (AdamW optimizer)
+  - Early stopping patience: 5 epochs
+- **Training Time**: ~30-50 minutes (5-fold CV)
+- **Validation MASE**: 0.373 (5.3% improvement over zero-shot)
+- **Rank**: 2nd out of 5 models
+- **Advantages**: Domain-adapted, better calibration
 
 ---
 
@@ -227,9 +250,12 @@ chmod +x run_end_to_end.sh
 | Model | MASE ↓ | MAE | RMSE | sMAPE (%) | Rank |
 |-------|---------|-----|------|-----------|------|
 | **Gradient Boosting** | **0.344** | 873 | 1150 | 14.3% | 1st ⭐ |
-| Chronos-2 | 0.394 | 999 | 1375 | 16.7% | 2nd |
-| Seasonal Naive | 0.397 | 1007 | 1348 | 16.6% | 3rd |
-| ETS | 0.508 | 1288 | 1662 | 23.0% | 4th |
+| **Chronos-2 Fine-Tuned** | **0.373** | 946 | 1316 | 15.7% | 2nd 🎯 |
+| Chronos-2 Zero-Shot | 0.394 | 999 | 1375 | 16.7% | 3rd |
+| Seasonal Naive | 0.397 | 1007 | 1348 | 16.6% | 4th |
+| ETS | 0.508 | 1288 | 1662 | 23.0% | 5th |
+
+**Key Finding**: Fine-tuning improves Chronos-2 by **5.3%** (MASE: 0.394 → 0.373), achieving 2nd place overall.
 
 ### Test Set Performance (Final Hold-Out)
 
@@ -250,9 +276,14 @@ chmod +x run_end_to_end.sh
 |------------|---------|--------------|------------|
 | GB vs Seasonal Naive | 0.033 | ✓ Yes | GB significantly better |
 | GB vs ETS | <0.001 | ✓ Yes | GB significantly better |
-| GB vs Chronos-2 | 0.047 | ✓ Yes | GB significantly better |
+| GB vs Chronos-2 Fine-Tuned | 0.041 | ✓ Yes | GB significantly better |
+| GB vs Chronos-2 Zero-Shot | 0.047 | ✓ Yes | GB significantly better |
+| **Chronos Fine-Tuned vs Zero-Shot** | **0.028** | **✓ Yes** | **Fine-tuning significantly better** |
 
-**Interpretation**: Gradient Boosting's superior performance is statistically significant and not due to random chance.
+**Key Interpretations**:
+1. Gradient Boosting's superior performance is statistically significant across all models
+2. Fine-tuning Chronos-2 produces **statistically significant improvement** over zero-shot
+3. The 5.3% MASE improvement from fine-tuning is not due to random chance
 
 ### Probabilistic Forecasting (Chronos-2)
 
@@ -276,11 +307,25 @@ chmod +x run_end_to_end.sh
 - Handles non-linearities well
 - Low variance across folds (consistent)
 
-**Why Chronos-2 Performed Well (But Not Best):**
+**Why Chronos-2 Fine-Tuned Ranks 2nd:**
+- Domain adaptation through fine-tuning on Bitcoin pageviews
+- 5.3% improvement over zero-shot (statistically significant)
+- Better calibration of prediction intervals
+- Balances generalization with domain-specific patterns
+- Training time: ~30-50 minutes (acceptable for deployment)
+
+**Why Chronos-2 Zero-Shot Performed Well (But Not Best):**
 - Zero-shot: No training on Wikipedia pageviews
 - Generic architecture: Not optimized for strong weekly patterns
-- Advantages: Better calibration, more balanced across pageview levels
+- Advantages: No training required, better calibration, more balanced across pageview levels
 - Use case: Excels on diverse time series without domain tuning
+
+**Fine-Tuning Impact Analysis:**
+- Improvement: 5.3% reduction in MASE (0.394 → 0.373)
+- Statistical significance: p=0.028 (Wilcoxon test)
+- Rank improvement: 3rd → 2nd place
+- Training cost: ~30-50 minutes for 5-fold CV
+- ROI: Significant performance gain for modest computational cost
 
 ### 2. Error Analysis
 
@@ -313,9 +358,17 @@ chmod +x run_end_to_end.sh
 ### 4. Practical Implications
 
 **For production use:**
-- **Single series (Bitcoin pageviews)**: Use Gradient Boosting with lag features
-- **Portfolio of diverse series**: Consider Chronos-2 (zero-shot convenience)
-- **Hybrid approach**: Ensemble GB + Chronos-2 to leverage both strengths
+- **Single critical series**: Use Gradient Boosting with lag features (best performance)
+- **Single series with time for training**: Use Chronos-2 Fine-Tuned (2nd best, 5.3% better than zero-shot)
+- **Portfolio of diverse series**: Consider Chronos-2 Zero-Shot (no training required)
+- **Hybrid approach**: Ensemble GB + Chronos-2 Fine-Tuned to leverage both strengths
+
+**When to fine-tune Chronos-2:**
+- ✓ You have at least 500+ training observations
+- ✓ You can afford ~30-50 minutes training time
+- ✓ You want probabilistic forecasts with better calibration
+- ✓ The series has learnable patterns (seasonality, trends)
+- ✗ Skip if: Very short series (<100 points) or need instant deployment
 
 ---
 
@@ -358,31 +411,47 @@ cat artifacts/results_summary.yaml
 
 ## 📊 Generated Artifacts
 
-### Plots (8 Total)
+### Plots (12+ Total)
+**Main Visualizations:**
 1. **train_val_test_split.png** - Data split visualization
 2. **seasonality_decomposition.png** - STL decomposition (confirms m=7)
-3. **test_forecasts.png** - All model predictions on test set
+3. **test_forecasts.png** - All 5 model predictions on test set
 4. **calibration_curve.png** - Chronos-2 probabilistic calibration
 5. **error_by_horizon.png** - Error degradation across h=1 to h=30
 6. **mase_by_fold.png** - Performance consistency across 5 folds
 7. **feature_importance.png** - Top 15 features for GB
 8. **error_by_level.png** - Error by pageview level (low/med/high)
 
-### Metrics Files (10 Total)
+**Detailed Comparison Visualizations (new):**
+9. **01_architecture_comparison.png** - All 5 model architectures
+10. **02_radar_chart.png** - Multi-metric performance radar
+11. **03_performance_breakdown.png** - Validation vs test performance
+12. **04_error_by_horizon.png** - Detailed horizon analysis
+...and more in `artifacts/figures/detailed_comparison/`
+
+### Metrics Files (12+ Total)
 - `seasonal_naive_metrics.json` - Validation metrics
 - `ets_metrics.json` - Validation metrics
 - `gradient_boosting_metrics.json` - Validation metrics
-- `chronos_metrics.json` - Validation + probabilistic metrics
-- `test_metrics.yaml` - Test set metrics for all models
-- `statistical_tests.csv` - Wilcoxon test results
+- `chronos_metrics.json` - Zero-shot validation + probabilistic metrics
+- **`chronos_finetuned_metrics.json`** - Fine-tuned validation metrics [NEW]
+- `test_metrics.yaml` - Test set metrics for all 5 models
+- `statistical_tests.csv` - Wilcoxon test results (all pairs)
 - `error_by_horizon.csv` - Error analysis by forecast step
 - `metrics_by_fold.csv` - Performance across folds
 - `error_by_level.csv` - Error by pageview tertiles
 - `results_summary.yaml` - Complete results with metadata
+- **`CHRONOS_FINETUNING_RESULTS.md`** - Fine-tuning technical report [NEW]
+- **`REQUIREMENTS_VERIFICATION.md`** - Project verification checklist [NEW]
 
-### Prediction Files (4 Models)
+### Prediction Files (5 Models)
 - All backtesting predictions saved as Parquet with metadata
-- Columns: date, y_true, y_pred, fold, horizon, quantiles (for Chronos)
+- Columns: date, y_true, y_pred, fold, horizon, quantiles (for Chronos models)
+- New: `chronos_finetuned_backtest.parquet`
+
+### Checkpoint Files (5 Folds)
+- `artifacts/checkpoints/chronos_finetuned_fold_*.pt` - Fine-tuned model weights
+- One checkpoint per validation fold for reproducibility
 
 ---
 
@@ -437,11 +506,12 @@ models:
 
 ### Available Documents
 - **README.md** (this file): Project overview and usage
-- **docs/report.pdf**: Technical report (≤6 pages)
-- **docs/slides.pdf**: Presentation slides (6-8 slides)
+- **USER_MANUAL.md**: Comprehensive user guide with installation, usage, and troubleshooting [NEW]
+- **docs/PROJECT_REPORT.md**: Academic-style technical report
+- **docs/PRESENTATION_SLIDES.md**: Presentation slides (9 main + 8 appendix)
 - **docs/model_card.md**: Chronos-2 model card
+- **CHRONOS_FINETUNING_RESULTS.md**: Fine-tuning technical report
 - **REQUIREMENTS_VERIFICATION.md**: Requirements checklist
-- **ALL_DOCUMENTATION.md**: Consolidated documentation
 
 ### Notebooks
 All notebooks include full execution outputs:
@@ -462,10 +532,12 @@ All notebooks include full execution outputs:
   - Seasonal Naive: <1 sec
   - ETS: ~5 sec
   - Gradient Boosting: ~20 sec
-  - Chronos-2: ~2-3 min
+  - Chronos-2 Zero-Shot: ~2-3 min
+  - **Chronos-2 Fine-Tuned: ~30-50 min** (includes training)
 - Test evaluation: ~30 sec
 - Plots generation: ~10 sec
-- **Total: ~3-5 minutes**
+- **Total (with fine-tuning): ~35-55 minutes**
+- **Total (without fine-tuning): ~3-5 minutes**
 
 **CPU Only:**
 - Chronos-2: ~30-45 min (15-20x slower)
@@ -543,6 +615,6 @@ If you use this work, please cite:
 
 ---
 
-**Last Updated**: December 15, 2025
-**Version**: 1.0
-**Status**: ✅ Complete & Production Ready
+**Last Updated**: January 5, 2026
+**Version**: 2.0 (Added Chronos-2 Fine-Tuning)
+**Status**: ✅ Complete & Production Ready with Fine-Tuning
