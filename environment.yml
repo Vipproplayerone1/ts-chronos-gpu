@@ -1,4 +1,4 @@
-name: ts-chronos-gpu
+3name: ts-chronos-gpu
 channels:
   - pytorch
   - nvidia

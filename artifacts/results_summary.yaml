@@ -1,4 +1,4 @@
-execution_time: '2025-12-15T18:22:05.359423'
+execution_time: '2026-01-05T18:52:09.761325'
 config:
   random_seed: 42
   data:
@@ -58,6 +58,28 @@ config:
       temperature: 1.0
       top_k: 50
       top_p: 1.0
+    chronos_finetuned:
+      model_name: amazon/chronos-t5-base
+      device: cuda
+      learning_rate: 3.0e-05
+      num_epochs: 25
+      batch_size: 4
+      accumulation_steps: 8
+      quantile_levels:
+      - 0.1
+      - 0.5
+      - 0.9
+      early_stopping_patience: 5
+      early_stopping_delta: 0.001
+      use_mixed_precision: true
+      gradient_checkpointing: true
+      torch_dtype: bfloat16
+      num_samples: 20
+      temperature: 1.0
+      top_k: 50
+      top_p: 1.0
+      checkpoint_dir: artifacts/checkpoints
+      save_checkpoints: true
   metrics:
     point_forecast:
     - mae
@@ -174,6 +196,25 @@ validation_metrics:
     coverage_80_std: 0.06463573143221772
     width_80_mean: 1244.071533203125
     width_80_std: 277.9844055175781
+  chronos_finetuned:
+    mae_mean: 946.4707845052083
+    mae_std: 222.53899672057764
+    rmse_mean: 1315.8013384000628
+    rmse_std: 447.4444634618736
+    smape_mean: 15.710576547726461
+    smape_std: 2.5168105069056295
+    mase_mean: 0.37320730194203844
+    mase_std: 0.0877503879703937
+    pinball_loss_0.1_mean: 157.28516276041668
+    pinball_loss_0.1_std: 42.433586368483546
+    pinball_loss_0.5_mean: 473.23539225260413
+    pinball_loss_0.5_std: 111.26949836028882
+    pinball_loss_0.9_mean: 398.12184342447915
+    pinball_loss_0.9_std: 144.33072166475435
+    coverage_80_mean: 0.49333333333333335
+    coverage_80_std: 0.09752492558885195
+    width_80_mean: 1331.877685546875
+    width_80_std: 187.72447204589844
 test_metrics:
   seasonal_naive:
     mae: 2745.1018032786887
@@ -206,17 +247,28 @@ test_metrics:
     coverage_80: 0.0
     width_80: 0.0
   chronos:
-    mae: 2836.303346033982
-    rmse: 4721.860217077553
-    smape: 37.056737481522596
-    mase: 1.1183959786100437
-    pinball_loss_0.1: 398.71437310290736
-    pinball_loss_0.5: 1418.151673016991
-    pinball_loss_0.9: 2124.61207977395
-    coverage_80: 0.14207650273224043
-    width_80: 768.9259033203125
+    mae: 2802.1571404862534
+    rmse: 4700.146957835412
+    smape: 36.41194523901333
+    mase: 1.1049316293108857
+    pinball_loss_0.1: 364.5353350436518
+    pinball_loss_0.5: 1401.0785702431267
+    pinball_loss_0.9: 2148.740654633069
+    coverage_80: 0.17759562841530055
+    width_80: 716.4869995117188
+  chronos_finetuned:
+    mae: 2788.3629203487876
+    rmse: 4664.53148704663
+    smape: 36.19710889704732
+    mase: 1.0994923661406133
+    pinball_loss_0.1: 384.36897161831877
+    pinball_loss_0.5: 1394.1814601743938
+    pinball_loss_0.9: 2103.7208309479593
+    coverage_80: 0.16120218579234974
+    width_80: 802.4315185546875
 model_rankings:
   gradient_boosting: 0.344356004364497
+  chronos_finetuned: 0.37320730194203844
   chronos: 0.393785705879941
   seasonal_naive: 0.3970091396271457
   ets: 0.5080420366343882

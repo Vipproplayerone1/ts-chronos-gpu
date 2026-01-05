@@ -64,6 +64,39 @@ models:
     top_k: 50
     top_p: 1.0
 
+  chronos_finetuned:
+    # Base model
+    model_name: "amazon/chronos-t5-base"
+    device: "cuda"
+
+    # Training hyperparameters
+    learning_rate: 0.00003  # Conservative for fine-tuning (3e-5)
+    num_epochs: 25
+    batch_size: 4  # Small for 4GB VRAM
+    accumulation_steps: 8  # Effective batch size = 32
+
+    # Quantile levels for training
+    quantile_levels: [0.1, 0.5, 0.9]
+
+    # Early stopping
+    early_stopping_patience: 5
+    early_stopping_delta: 0.001
+
+    # Memory optimization
+    use_mixed_precision: true
+    gradient_checkpointing: true
+    torch_dtype: "bfloat16"
+
+    # Inference (same as zero-shot)
+    num_samples: 20
+    temperature: 1.0
+    top_k: 50
+    top_p: 1.0
+
+    # Checkpointing
+    checkpoint_dir: "artifacts/checkpoints"
+    save_checkpoints: true
+
 # Metrics
 metrics:
   point_forecast:

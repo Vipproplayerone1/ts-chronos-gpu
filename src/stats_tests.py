@@ -289,3 +289,86 @@ def print_statistical_test_results(comparison_df: pd.DataFrame):
         print(f"  {row['interpretation']}")
 
     print("="*100)
+
+
+def compare_chronos_variants(
+    zero_shot_results: Dict,
+    finetuned_results: Dict,
+    test_type: str = "wilcoxon",
+    alpha: float = 0.05
+) -> pd.DataFrame:
+    """
+    Statistical comparison between Chronos zero-shot and fine-tuned variants.
+
+    Args:
+        zero_shot_results: Backtest results for zero-shot Chronos
+        finetuned_results: Backtest results for fine-tuned Chronos
+        test_type: Type of statistical test ('wilcoxon', 'ttest')
+        alpha: Significance level
+
+    Returns:
+        DataFrame with comparison results including effect size and win/tie/loss ratio
+    """
+    # Extract fold-wise errors (MASE)
+    zs_folds = zero_shot_results['folds']
+    ft_folds = finetuned_results['folds']
+
+    # Collect errors across folds
+    zs_errors = []
+    ft_errors = []
+
+    for zs_fold, ft_fold in zip(zs_folds, ft_folds):
+        if 'error' in zs_fold or 'error' in ft_fold:
+            continue
+
+        # Compute absolute errors for each fold
+        zs_mae = np.array([abs(pred - true) for pred, true in zip(zs_fold['y_pred'], zs_fold['y_true'])])
+        ft_mae = np.array([abs(pred - true) for pred, true in zip(ft_fold['y_pred'], ft_fold['y_true'])])
+
+        zs_errors.append(np.mean(zs_mae))
+        ft_errors.append(np.mean(ft_mae))
+
+    zs_errors = np.array(zs_errors)
+    ft_errors = np.array(ft_errors)
+
+    # Perform statistical test
+    if test_type == "wilcoxon":
+        statistic, p_value = wilcoxon_signed_rank_test(
+            zs_errors, ft_errors, alternative='greater'
+        )
+        test_name = "Wilcoxon Signed-Rank"
+    else:
+        statistic, p_value = paired_t_test(
+            zs_errors, ft_errors, alternative='greater'
+        )
+        test_name = "Paired t-test"
+
+    # Effect size (Cohen's d)
+    diff = zs_errors - ft_errors
+    effect_size = diff.mean() / (diff.std() + 1e-8)
+
+    # Win/tie/loss ratio
+    wins = (ft_errors < zs_errors).sum()
+    ties = (ft_errors == zs_errors).sum()
+    losses = (ft_errors > zs_errors).sum()
+
+    # Mean improvement
+    mean_improvement = ((zs_errors.mean() - ft_errors.mean()) / zs_errors.mean()) * 100
+
+    # Create results dataframe
+    results = pd.DataFrame({
+        'comparison': ['Fine-Tuned vs Zero-Shot'],
+        'test': [test_name],
+        'statistic': [statistic],
+        'p_value': [p_value],
+        'significant': [p_value < alpha if not np.isnan(p_value) else False],
+        'effect_size': [effect_size],
+        'wins': [wins],
+        'ties': [ties],
+        'losses': [losses],
+        'mean_improvement_%': [mean_improvement],
+        'zero_shot_mean_error': [zs_errors.mean()],
+        'finetuned_mean_error': [ft_errors.mean()]
+    })
+
+    return results

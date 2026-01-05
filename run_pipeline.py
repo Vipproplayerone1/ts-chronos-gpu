@@ -39,6 +39,7 @@ from src.utils import (
 )
 from src.baselines import create_baseline_models
 from src.chronos_model import create_chronos_model
+from src.chronos_finetuned import create_chronos_finetuned_model
 from src.backtesting import backtest_multiple_models, save_backtest_results
 from src.metrics import (
     compute_point_metrics,
@@ -132,8 +133,11 @@ def main(config_path: str = "configs/default.yaml"):
     # Create models
     models = create_baseline_models(config.config)
 
-    # Add Chronos model
+    # Add Chronos zero-shot model
     models['chronos'] = create_chronos_model(config.config)
+
+    # Add Chronos fine-tuned model
+    models['chronos_finetuned'] = create_chronos_finetuned_model(config.config)
 
     print(f"[OK] Models to evaluate: {list(models.keys())}")
 
