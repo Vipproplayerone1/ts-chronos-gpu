@@ -178,18 +178,12 @@ python test_setup.py
 
 ### 4.1 Run Everything (One Command)
 
-**Windows**:
-```cmd
-run_end_to_end.bat
-```
-
-**Linux/Mac**:
+**All platforms (Windows/Linux/Mac)**:
 ```bash
-chmod +x run_end_to_end.sh
-./run_end_to_end.sh
+python run_end_to_end.py
 ```
 
-This will:
+This cross-platform Python script will:
 1. Load Bitcoin Wikipedia pageviews data
 2. Train all 5 models (including fine-tuning Chronos-2)
 3. Run 5-fold cross-validation
@@ -200,6 +194,13 @@ This will:
 **Expected Time**:
 - With GPU: ~35-55 minutes (includes fine-tuning)
 - CPU only: ~1-2 hours
+
+**What the script does**:
+- ✓ Checks Python version (3.10+ required)
+- ✓ Verifies dependencies (warns if packages missing)
+- ✓ Creates necessary directories automatically
+- ✓ Runs the complete pipeline
+- ✓ Provides clear error messages and troubleshooting tips
 
 ### 4.2 Run Without Fine-Tuning (Fast)
 
@@ -1046,11 +1047,11 @@ For Bitcoin pageviews:
 
 | Command | Purpose | Time |
 |---------|---------|------|
+| `python run_end_to_end.py` | One-command execution (recommended) | 35-55 min (GPU) |
 | `python run_pipeline.py` | Run complete pipeline | 35-55 min (GPU) |
 | `python visualize_model_comparison.py` | Generate plots | ~10 sec |
 | `python run_additional_analysis.py` | Statistical tests | ~5 sec |
 | `python test_setup.py` | Verify installation | ~5 sec |
-| `run_end_to_end.bat/sh` | One-command execution | 35-55 min (GPU) |
 
 ### A.2 Environment Commands
 
@@ -1123,11 +1124,10 @@ final/
 │   └── 03_test_eval.ipynb
 │
 └── Execution scripts
+    ├── run_end_to_end.py          # One-command runner (cross-platform)
     ├── run_pipeline.py            # Main pipeline
     ├── run_additional_analysis.py # Extra analysis
-    ├── visualize_model_comparison.py # Visualizations
-    ├── run_end_to_end.bat         # Windows runner
-    └── run_end_to_end.sh          # Linux/Mac runner
+    └── visualize_model_comparison.py # Visualizations
 ```
 
 ---

@@ -85,8 +85,7 @@ final/
 └── Execution scripts
     ├── run_pipeline.py                # Main pipeline (Python)
     ├── run_additional_analysis.py     # Extra analysis
-    ├── run_end_to_end.bat             # One-command run (Windows)
-    ├── run_end_to_end.sh              # One-command run (Linux/Mac)
+    ├── run_end_to_end.py              # One-command run (cross-platform)
     ├── run_notebooks.bat              # Execute all notebooks (Windows)
     ├── run_notebooks.sh               # Execute all notebooks (Linux/Mac)
     └── test_setup.py                  # Environment verification
@@ -149,20 +148,14 @@ python test_setup.py
 
 ### Run Complete Pipeline
 
-**Windows**:
-```batch
-run_end_to_end.bat
-```
-
-**Linux/Mac**:
+**Single command (cross-platform)**:
 ```bash
-chmod +x run_end_to_end.sh
-./run_end_to_end.sh
+python run_end_to_end.py
 ```
 
 **Runtime**:
-- With GPU: ~3-5 minutes
-- CPU only: ~30-45 minutes
+- With GPU: ~35-55 minutes (includes fine-tuning)
+- CPU only: ~1-2 hours
 
 ---
 
@@ -398,8 +391,8 @@ Tracked in `artifacts/results_summary.yaml`:
 
 ### One-Command Execution
 ```bash
-# Complete end-to-end run
-./run_end_to_end.sh
+# Complete end-to-end run (cross-platform)
+python run_end_to_end.py
 
 # Results in artifacts/
 ls artifacts/metrics/*.json

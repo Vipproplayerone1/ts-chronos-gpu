@@ -65,6 +65,7 @@ def test_src_modules():
         'src.backtesting',
         'src.baselines',
         'src.chronos_model',
+        'src.chronos_finetuned',
         'src.stats_tests',
         'src.plots',
         'src.utils'
