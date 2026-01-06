@@ -323,19 +323,7 @@ Output: `artifacts/metrics/statistical_tests.csv`
 
 ### 5.4 Run Jupyter Notebooks
 
-**Execute All Notebooks**:
-
-Windows:
-```cmd
-run_notebooks.bat
-```
-
-Linux/Mac:
-```bash
-./run_notebooks.sh
-```
-
-**Or Run Individually**:
+**Run Individually** (Recommended):
 ```bash
 jupyter notebook notebooks/01_eda.ipynb
 jupyter notebook notebooks/02_backtesting.ipynb
@@ -1124,10 +1112,11 @@ final/
 │   └── 03_test_eval.ipynb
 │
 └── Execution scripts
-    ├── run_end_to_end.py          # One-command runner (cross-platform)
-    ├── run_pipeline.py            # Main pipeline
-    ├── run_additional_analysis.py # Extra analysis
-    └── visualize_model_comparison.py # Visualizations
+    ├── run_end_to_end.py             # One-command runner (cross-platform)
+    ├── run_pipeline.py               # Main pipeline
+    ├── run_additional_analysis.py    # Extra analysis
+    ├── visualize_model_comparison.py # Visualizations
+    └── test_setup.py                 # Environment verification
 ```
 
 ---

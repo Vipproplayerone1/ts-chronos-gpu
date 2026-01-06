@@ -83,11 +83,9 @@ final/
 │   └── SLIDES_TEMPLATE.md             # Slides structure
 │
 └── Execution scripts
+    ├── run_end_to_end.py              # One-command run (cross-platform)
     ├── run_pipeline.py                # Main pipeline (Python)
     ├── run_additional_analysis.py     # Extra analysis
-    ├── run_end_to_end.py              # One-command run (cross-platform)
-    ├── run_notebooks.bat              # Execute all notebooks (Windows)
-    ├── run_notebooks.sh               # Execute all notebooks (Linux/Mac)
     └── test_setup.py                  # Environment verification
 ```
 
@@ -394,10 +392,13 @@ Tracked in `artifacts/results_summary.yaml`:
 # Complete end-to-end run (cross-platform)
 python run_end_to_end.py
 
-# Results in artifacts/
-ls artifacts/metrics/*.json
-ls artifacts/figures/*.png
+# View results
 cat artifacts/results_summary.yaml
+ls artifacts/figures/*.png
+ls artifacts/metrics/*.json
+
+# Run notebooks interactively (optional)
+jupyter notebook notebooks/
 ```
 
 ---
